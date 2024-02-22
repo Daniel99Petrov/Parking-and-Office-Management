@@ -88,6 +88,6 @@ export class AuthService {
     updatePasswordDto.password = newHashString;
     await this.userService.update(id, updatePasswordDto);
 
-    return { message: 'Password updated successfully' };
+    return 'Password updated successfully';
   }
 }
