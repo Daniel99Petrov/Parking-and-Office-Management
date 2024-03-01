@@ -3,7 +3,6 @@ import { UniqueModule } from './utils/decorators/unique/unique.module';
 import { IsUniqueConstraint } from './utils/decorators/unique/validator';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { GlobalExceptionFilter } from './utils/filters/GlobalExceptionFilter';
-import { dataSourceOptions } from 'src/db/data-source';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthGuard } from './utils/guards/auth.guard';
@@ -15,6 +14,7 @@ import { SpotModule } from './spot/spot.module';
 import { FloorPlanModule } from './floor-plan/floor_plan.module';
 import { LocationModule } from './location/location.module';
 import { ReservationModule } from './reservation/reservation.module';
+import { dataSourceOptions } from './db/data-source';
 
 @Module({
   imports: [
