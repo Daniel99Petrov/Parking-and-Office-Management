@@ -1,6 +1,6 @@
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'node:util';
-import { User } from 'src/user/entities/user.entity';
+import { User } from 'src/user/user.entity';
 import { UserRoles } from 'src/user/user-role.enum';
 import { MigrationInterface, QueryRunner } from 'typeorm';
 const scrypt = promisify(_scrypt);
