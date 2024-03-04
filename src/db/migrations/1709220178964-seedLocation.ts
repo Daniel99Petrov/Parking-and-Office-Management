@@ -1,4 +1,4 @@
-import { Location } from 'src/location/entities/location.entity';
+import { Location } from 'src/location/location.entity';
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { LocationSeed } from '../seeds/location.seed';
 

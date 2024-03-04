@@ -9,7 +9,7 @@ import { FloorPlan } from './floor_plan.entity';
 import { Not, Repository } from 'typeorm';
 import { Spot } from 'src/spot/entities/spot.entity';
 import { SpotType } from 'src/spot-type/entities/spot-type.entity';
-import { Location } from 'src/location/entities/location.entity';
+import { Location } from 'src/location/location.entity';
 
 @Injectable()
 export class FloorPlanService {
