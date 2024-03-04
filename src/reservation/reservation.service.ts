@@ -10,7 +10,7 @@ import { Reservation } from './reservation.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
-import { Spot } from 'src/spot/entities/spot.entity';
+import { Spot } from 'src/spot/spot.entity';
 
 @Injectable()
 export class ReservationService {

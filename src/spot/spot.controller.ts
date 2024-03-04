@@ -11,12 +11,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { SpotService } from './spot.service';
-import { UpdateSpotDto } from './dto/update-spot.dto';
 import { RolesGuard } from 'src/utils/guards/roles.guard';
 import { Roles } from 'src/utils/decorators/role/roles.decorator';
 import { UserRoles } from 'src/user/user-role.enum';
-import { CreateSpotsDto } from './dto/create-multiple-spots.dto';
-import { CreateSpotDto } from './dto/create-spot.dto';
+import { CreateSpotDto, CreateSpotsDto, UpdateSpotDto } from './spot.dto';
 
 @Controller('spot')
 @UseGuards(RolesGuard)
