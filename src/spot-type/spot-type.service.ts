@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateSpotTypeDto } from './dto/create-spot-type.dto';
 import { UserService } from 'src/user/user.service';
 import { LocationService } from 'src/location/location.service';
-import { FloorPlan } from 'src/floor-plan/floor_plan.entity';
+import { FloorPlan } from 'src/floor-plan/floor-plan.entity';
 import { Spot } from 'src/spot/spot.entity';
 
 @Injectable()
