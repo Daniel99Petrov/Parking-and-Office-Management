@@ -11,6 +11,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
 import { Spot } from '../spot/spot.entity';
+import { User } from 'src/user/user.entity';
+import { FloorPlan } from 'src/floor-plan/floor-plan.entity';
 
 @Injectable()
 export class ReservationService {
@@ -97,6 +99,21 @@ export class ReservationService {
     const reservations = await this.reservationRepository
       .createQueryBuilder('reservation')
       .where('reservation.userId = :userId', { userId })
+      .andWhere('reservation.start >= :currentDateTime', { currentDateTime })
+      .orderBy('reservation.start', 'ASC')
+      .getMany();
+    return reservations;
+  }
+
+  async findAllFutureByUserIdAndLocation(userId: string, locationId: string) {
+    const currentDateTime = new Date();
+    const reservations = await this.reservationRepository
+      .createQueryBuilder('reservation')
+      .leftJoin(Spot, 's', 'reservation.spot_id = s.id')
+      .leftJoin(User, 'u', 'reservation.user_id = u.id')
+      .leftJoin(FloorPlan, 'fp', 's.floor_plan_id = fp.id')
+      .where('fp.location_id = :locationId', { locationId })
+      .andWhere('reservation.userId = :userId', { userId })
       .andWhere('reservation.start >= :currentDateTime', { currentDateTime })
       .orderBy('reservation.start', 'ASC')
       .getMany();

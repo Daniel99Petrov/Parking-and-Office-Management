@@ -41,28 +41,42 @@ export class ReservationController {
     return reservation;
   }
   @Get('by-spot/:spotId')
-  async findAllBySpot(@Param('spotId') spotId: string): Promise<Reservation[]> {
+  async findAllBySpot(
+    @Param('spotId', ParseUUIDPipe) spotId: string,
+  ): Promise<Reservation[]> {
     return await this.reservationService.findAllBySpotId(spotId);
   }
   @Get('by-user/:userId')
-  async findAllByUser(@Param('userId') userId: string): Promise<Reservation[]> {
+  async findAllByUser(
+    @Param('userId', ParseUUIDPipe) userId: string,
+  ): Promise<Reservation[]> {
     return await this.reservationService.findAllByUserId(userId);
   }
   @Get('by-user-future/:userId')
   async findAllFutureByUser(
-    @Param('userId') userId: string,
+    @Param('userId', ParseUUIDPipe) userId: string,
   ): Promise<Reservation[]> {
     return await this.reservationService.findAllFutureByUserId(userId);
   }
+  @Get('by-user-and-location-future/:userId/:locationId')
+  async findAllFutureByUserAndLocation(
+    @Param('userId', ParseUUIDPipe) userId: string,
+    @Param('locationId', ParseUUIDPipe) locationId: string,
+  ): Promise<Reservation[]> {
+    return await this.reservationService.findAllFutureByUserIdAndLocation(
+      userId,
+      locationId,
+    );
+  }
   @Get('by-user-past/:userId')
   async findAllPastByUser(
-    @Param('userId') userId: string,
+    @Param('userId', ParseUUIDPipe) userId: string,
   ): Promise<Reservation[]> {
     return await this.reservationService.findAllPastByUserId(userId);
   }
   @Get('by-user-current/:userId')
   async findAllCurrentByUser(
-    @Param('userId') userId: string,
+    @Param('userId', ParseUUIDPipe) userId: string,
   ): Promise<Reservation[]> {
     return await this.reservationService.findAllCurrentByUserId(userId);
   }
