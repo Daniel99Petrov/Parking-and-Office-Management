@@ -38,6 +38,13 @@ export class FloorPlanController {
       locationId,
     );
   }
+  @Get('by-location/search')
+  async findAllByLocation(
+    @Query('locationId')
+    locationId: string,
+  ) {
+    return await this.floorPlanService.findAllByLocationId(locationId);
+  }
 
   @Get(':id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {

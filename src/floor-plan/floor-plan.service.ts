@@ -50,6 +50,17 @@ export class FloorPlanService {
 
     return getAllBySpotType;
   }
+  async findAllByLocationId(locationId: string) {
+    const getAllByLocation = this.floorPlanRepository
+      .createQueryBuilder('floorPlan')
+      .select('floorPlan')
+      .where('floorPlan.locationId = :locationId', {
+        locationId: locationId,
+      })
+      .getMany();
+
+    return getAllByLocation;
+  }
 
   async create(createFloorPlanDto: CreateFloorPlanDto): Promise<FloorPlan> {
     const newFloorPlan = this.floorPlanRepository.create(createFloorPlanDto);
