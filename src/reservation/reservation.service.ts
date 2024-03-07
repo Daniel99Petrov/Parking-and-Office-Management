@@ -140,20 +140,43 @@ export class ReservationService {
 
     const spot = await this.spotService.findOne(createReservationDto.spotId);
     await this.checkIfSpotIsPermanent(spot);
+    const allSpotReservations = [];
+    const allUserReservations = [];
+    if (createReservationDto.currentReservations.length > 0) {
+      const currentSpotReservations =
+        createReservationDto.currentReservations.find((res) => {
+          return res.spotId === createReservationDto.spotId;
+        });
+      if (currentSpotReservations) {
+        allSpotReservations.push(currentSpotReservations);
+      }
+    }
     const existingSpotReservations = await this.findAllBySpotId(
       createReservationDto.spotId,
     );
+    allSpotReservations.push(...existingSpotReservations);
     await this.checkIfSpotHasReservation(
       createReservationDto,
-      existingSpotReservations,
+      allSpotReservations,
     );
+
+    if (createReservationDto.currentReservations.length > 0) {
+      const currentUserReservations =
+        createReservationDto.currentReservations.find((res) => {
+          return res.userId === createReservationDto.userId;
+        });
+      if (currentUserReservations) {
+        allUserReservations.push(currentUserReservations);
+      }
+    }
     const existingUserReservations = await this.findAllCurrentAndFutureByUserId(
       createReservationDto.userId,
     );
+    allUserReservations.push(...existingUserReservations);
     await this.checkIfUserHasReservation(
       spot,
       createReservationDto,
-      existingUserReservations,
+      allUserReservations,
     );
 
     const newReservation =
@@ -185,6 +208,7 @@ export class ReservationService {
 
       reservations.push(newReservation);
     }
+
     const createdReservations = [];
     for (const reservation of reservations) {
       const createdReservation =
