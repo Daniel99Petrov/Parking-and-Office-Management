@@ -1,6 +1,7 @@
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { Type } from 'class-transformer';
 import { IsArray, ValidateNested } from 'class-validator';
+import { Reservation } from './reservation.entity';
 
 class CreateReservationDto {
   @IsNotEmpty({ message: 'Start date cannot be empty' })
@@ -23,6 +24,9 @@ class CreateReservationDto {
   @IsNotEmpty()
   @IsUUID()
   modifiedBy: string;
+
+  @IsOptional()
+  currentReservations: Reservation[];
 }
 
 class CreateReservationsDto {
